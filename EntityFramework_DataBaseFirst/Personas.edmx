@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="PersonasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="PersonasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Genero">
           <Key>
             <PropertyRef Name="id" />
@@ -12,8 +12,6 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="descripcion" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Personas.dbo.Personas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="Personas">
           <Key>
             <PropertyRef Name="id" />
@@ -38,22 +36,13 @@ advertencia 6002: La tabla o vista 'Personas.dbo.Personas' no tiene definida nin
         </Association>
         <EntityContainer Name="PersonasModelStoreContainer">
           <EntitySet Name="Genero" EntityType="Self.Genero" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Personas" EntityType="Self.Personas" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Personas].[id] AS [id], 
-    [Personas].[nombre] AS [nombre], 
-    [Personas].[apellido] AS [apellido], 
-    [Personas].[edad] AS [edad], 
-    [Personas].[idGenero] AS [idGenero]
-    FROM [dbo].[Personas] AS [Personas]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="Personas" EntityType="Self.Personas" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Personas_Genero" Association="Self.FK_Personas_Genero">
             <End Role="Genero" EntitySet="Genero" />
             <End Role="Personas" EntitySet="Personas" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PersonasModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
